@@ -6,9 +6,9 @@ const path = require('path');
 exports.addUser = (req, res) => {
     try {
         const users = readData();
-        const newUser = { ...req.body, id: (users.length ? Math.max(...users.map(user => user.id)) + 1 : 1) }; // Assign an ID
-        users.push(newUser); // Add the new user to the array
-        writeData(users); // Save the updated array to the file
+        const newUser = { ...req.body, id: (users.length ? Math.max(...users.map(user => user.id)) + 1 : 1) };
+        users.push(newUser);
+        writeData(users);
 
         res.status(200).json({
             success: true,
@@ -42,11 +42,11 @@ exports.getAllUsers = (req, res) => {
 
 exports.getSingleUsers = (req, res) => {
     try {
-        let ID = parseInt(req.params.id, 10); // Ensure ID is an integer
+        let ID = parseInt(req.params.id, 10);
         console.log("ID: ", ID);
 
         const users = readData();
-        const singleUser = users.find(user => user.id === ID); // Find user
+        const singleUser = users.find(user => user.id === ID);
 
         if (!singleUser) {
             return res.status(404).json({
@@ -71,14 +71,14 @@ exports.getSingleUsers = (req, res) => {
 
 exports.editUser = (req, res) => {
     try {
-        let ID = parseInt(req.params.id, 10); // Ensure ID is an integer
+        let ID = parseInt(req.params.id, 10)
         console.log("ID: ", ID);
 
         let body = req.body;
         console.log("body: ", body);
 
         const users = readData();
-        let userIndex = users.findIndex(user => user.id === ID); // Find user index
+        let userIndex = users.findIndex(user => user.id === ID)
 
         if (userIndex === -1) {
             return res.status(404).json({
@@ -88,13 +88,13 @@ exports.editUser = (req, res) => {
         }
 
         // Update the user
-        users[userIndex] = { ...users[userIndex], ...body }; // Merge existing user data with new data
+        users[userIndex] = { ...users[userIndex], ...body }
         writeData(users);
 
         res.status(200).json({
             success: true,
             message: "User updated successfully",
-            user: users[userIndex], // Return the updated user
+            user: users[userIndex],
         });
 
     } catch (error) {
@@ -108,17 +108,17 @@ exports.editUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
     try {
-        let ID = parseInt(req.params.id, 10); // Ensure ID is an integer
+        let ID = parseInt(req.params.id, 10);
         console.log("ID: ", ID);
 
         const users = readData();
-        let userIndex = -1; // Initialize userIndex to -1
+        let userIndex = -1;
 
         // Find the user index
         for (let i = 0; i < users.length; i++) {
             if (users[i].id === ID) {
                 userIndex = i;
-                break; // Exit the loop once the user is found
+                break;
             }
         }
 
@@ -134,13 +134,13 @@ exports.deleteUser = (req, res) => {
         const deletedUser = users[userIndex];
 
         // Remove the user from the array
-        users.splice(userIndex, 1); // Remove the user from the array
-        writeData(users); // Save the updated array to the file
+        users.splice(userIndex, 1);
+        writeData(users);
 
         res.status(200).json({
             success: true,
             message: "User deleted successfully",
-            user: deletedUser, // Return the deleted user
+            user: deletedUser,
         });
 
     } catch (error) {

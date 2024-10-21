@@ -8,15 +8,11 @@
     "id": 2
   },
   {
-    "name": "mary",
+    "name": "jack",
     "id": 3
   },
   {
-    "name": "jack",
+    "name": "mary",
     "id": 4
-  },
-  {
-    "name": "rose",
-    "id": 5
   }
 ]
