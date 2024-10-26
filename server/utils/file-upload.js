@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Update the path to the uploads directory
-const filePath = path.join(__dirname, '..', 'uploads', 'datas.json');
+const filePath = path.join(__dirname, '..', 'datas', 'datas.json');
 
 // Function to read data from the JSON file
 const readData = () => {
